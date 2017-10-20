@@ -12,7 +12,7 @@ public class Tutorial : MonoBehaviour {
 		Vector3 vec = transform.position;
 		vec.x = 5;
 		transform.position = vec;
-	}Queue 
+	}//Queue 
 	
 	// Update is called once per frame
 	void Update () {
