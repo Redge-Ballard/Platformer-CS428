@@ -8,7 +8,7 @@ public class MasterController : MonoBehaviour {
 	private static MasterController Instance;
 
 	// Data
-	// private ISceneController sceneController;
+	private ISceneController sceneController;
 	// private GameState gameState;
 	// private List<IGameStateListener> gameStateListener;
 	// private Settings settings;
@@ -20,13 +20,15 @@ public class MasterController : MonoBehaviour {
 
 	// }
 
-	// private Boolean RegisterAsSceneController(ISceneController sceneController){
+	private bool registerAsSceneController(ISceneController sceneController){
+		//Might need additional operations to properly dispose of the old but...
+		this.sceneController=sceneController;
+		return true;
+	}
 
-	// }
-
-	// public ISceneController GetSceneController(){
-
-	// }
+	public ISceneController GetSceneController(){
+		return sceneController;
+	}
 
 	// public void UpdateGameState(GameState gameState){
 		
