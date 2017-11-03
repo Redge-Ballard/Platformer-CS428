@@ -5,7 +5,21 @@ using UnityEngine;
 public class MasterController : MonoBehaviour {
 	
 	// Singleton
-	private static MasterController Instance;
+	private static MasterController instance;
+	private static int setI;
+
+	private MasterController(){}
+
+	public static MasterController Instance {
+		get {
+			if (instance == null && setI == 0) {
+				setI = 1;
+				//Debug.Log ("creating new Master");
+				instance = new MasterController ();
+			}
+			return instance;
+		}
+	}
 
 	// Data
 	private ISceneController sceneController;
@@ -30,6 +44,12 @@ public class MasterController : MonoBehaviour {
 		return sceneController;
 	}
 
+	public void initializeMenuSceneController()
+	{
+		//Debug.Log ("initializing!");
+		sceneController = new SceneControllerMainMenu ();
+	}
+
 	// public void UpdateGameState(GameState gameState){
 		
 	// }
@@ -39,21 +59,25 @@ public class MasterController : MonoBehaviour {
 	// }
 
 	private void Awake() {
-		if(Instance == null){
+		if(instance == null){
 			DontDestroyOnLoad(gameObject);
-			Instance = this;
-		} else if(Instance != this){
+			instance = this;
+		} else if(instance != this){
 			Destroy(gameObject);
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-		
+		sceneController = new SceneControllerMainMenu();
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+		
+
 }

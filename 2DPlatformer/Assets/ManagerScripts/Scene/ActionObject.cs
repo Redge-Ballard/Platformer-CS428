@@ -9,19 +9,19 @@ public class ActionObjectChangeScene : ActionObject{
 
 }
 public class ActionObjectShowMainMenu : ActionObject{
-
+	//todo: take in variables for startup?
 }
 public class ActionObjectShowSettingsView : ActionObject{
 
 }
 public class ActionObjectShowLevelSelectionsView : ActionObject{
-
+	//todo: take in levels unlocked
 }
 public class ActionObjectShowLevelAbilitySelectionView : ActionObject{
-
+	//todo: take in abilities unlocked and level selected
 }
 public class ActionObjectSelectLevelAbility : ActionObject{
-
+	//call this within PowerupSelectorManager
 }
 public class ActionObjectPlayerUseAbility : ActionObject{
 
