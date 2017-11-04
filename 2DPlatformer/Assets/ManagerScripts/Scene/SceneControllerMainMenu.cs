@@ -47,6 +47,8 @@ public class SceneControllerMainMenu: ISceneController{
 	{
 	}
 
-
+    public void menuMoveDirection(ActionObjectMoveMenuDirection a_actionObject)
+    {
+    }
 
 }

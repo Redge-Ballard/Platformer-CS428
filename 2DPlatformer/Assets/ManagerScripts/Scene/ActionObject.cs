@@ -29,3 +29,7 @@ public class ActionObjectPlayerUseAbility : ActionObject{
 public class ActionObjectPlayerMoveDirection : ActionObject{
 
 }
+public class ActionObjectMoveMenuDirection : ActionObject
+{
+
+}
