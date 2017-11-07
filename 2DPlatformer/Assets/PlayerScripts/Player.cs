@@ -12,19 +12,20 @@ public class Player : MonoBehaviour, IPlayer
     private List<IPlayerStatModifier> persistentModifiers;
     private List<IPlayerStatModifier> modifiers;
     private List<IPlayerListener> listeners;
-    private List<IItem> items;
 
     void Awake()
     {
         //needs to register itself with the scenecontroller
         //MasterController.Instance.GetCurrentSceneController().RegisterPlayerScript();
+
+        baseHealth = 1;
     }
 
     /*
      * Helper function that takes the stat type and specific base stat and iterates over the modifiers, 
      * sums up the stat changes, and returns the final stats value 
      */
-    public int StatHelper(PlayerStatType type, int stat_base)
+    private int StatHelper(PlayerStatType type, int stat_base)
     {
         int final = stat_base;
         foreach(IPlayerStatModifier mod in persistentModifiers)
@@ -43,11 +44,6 @@ public class Player : MonoBehaviour, IPlayer
         return true;
     }
 
-    public List<IItem> GetItems()
-    {
-        return items;
-    }
-
     //does this return base health? Or does it need to account for modifiers? 
     public int GetHealth()
     {
@@ -55,9 +51,9 @@ public class Player : MonoBehaviour, IPlayer
     }
 
     //what does this return? the amount of damage taken? Or the current health after taking dmg? 
-    public int TakeDamage()
+    public void TakeDamage(int dmg)
     {
-        return 0;
+        baseHealth -= dmg;
     }
 
     public int GetSpeed()
