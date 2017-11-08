@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DeathTrap : MonoBehaviour, ITrap {
 
+    int cooldown;
+
 	// Use this for initialization
 	void Start () {
-		
+        //set cooldown 
 	}
 	
 	// Update is called once per frame
@@ -20,6 +22,7 @@ public class DeathTrap : MonoBehaviour, ITrap {
     {
         if(collision.collider.CompareTag("Player"))
         {
+
         }
     }
 
@@ -30,9 +33,10 @@ public class DeathTrap : MonoBehaviour, ITrap {
 
     public int GetBaseCooldown()
     {
-        return 0;
+        return cooldown;
     }
 
+    //shouldn't this be in StatModifier?? 
     public int GetRemainingCooldown()
     {
         return 0;

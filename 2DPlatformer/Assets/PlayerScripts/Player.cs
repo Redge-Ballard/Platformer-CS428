@@ -15,7 +15,6 @@ public class Player : MonoBehaviour, IPlayer
 
     void Awake()
     {
-        //needs to register itself with the scenecontroller
         //MasterController.Instance.GetCurrentSceneController().RegisterPlayerScript();
 
         baseHealth = 1;
@@ -54,6 +53,7 @@ public class Player : MonoBehaviour, IPlayer
     public void TakeDamage(int dmg)
     {
         baseHealth -= dmg;
+        UpdateListeners();
     }
 
     public int GetSpeed()
@@ -74,12 +74,14 @@ public class Player : MonoBehaviour, IPlayer
     public bool AddPersistentModifier(IPlayerStatModifier modifier)
     {
         persistentModifiers.Add(modifier);
+        UpdateListeners();
         return true;
     }
 
     public bool AddModifier(IPlayerStatModifier modifier)
     {
         modifiers.Add(modifier);
+        UpdateListeners();
         return true;
     }
 
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour, IPlayer
     {
         persistentModifiers = new List<IPlayerStatModifier>();
         modifiers = new List<IPlayerStatModifier>();
+        UpdateListeners();
         return true;
     }
 
@@ -101,6 +104,7 @@ public class Player : MonoBehaviour, IPlayer
             {
                 modifiers.Remove(mod);
             }
+            UpdateListeners();
         }
         return true;
     }
@@ -115,6 +119,15 @@ public class Player : MonoBehaviour, IPlayer
                 modifiers.Remove(mod);
             }
         }
+        UpdateListeners();
         return true;
+    }
+
+    public void UpdateListeners()
+    {
+        foreach(IPlayerListener listen in listeners)
+        {
+            listen.Update();
+        }
     }
 }
