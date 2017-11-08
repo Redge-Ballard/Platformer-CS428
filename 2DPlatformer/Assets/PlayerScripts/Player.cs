@@ -20,6 +20,20 @@ public class Player : MonoBehaviour, IPlayer
         baseHealth = 1;
     }
 
+    void Update()
+    {
+        Vector2 vec = new Vector2(.01f, 0);
+        PlayerMove(vec);
+    }
+
+    public void PlayerMove(Vector2 move)
+    {
+        Vector3 pos = transform.position;
+        pos.x += move.x;
+        pos.y += move.y;
+        transform.position = pos;
+    }
+
     /*
      * Helper function that takes the stat type and specific base stat and iterates over the modifiers, 
      * sums up the stat changes, and returns the final stats value 
