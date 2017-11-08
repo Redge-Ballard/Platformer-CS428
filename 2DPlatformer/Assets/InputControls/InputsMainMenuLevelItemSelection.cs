@@ -1,9 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class SettingsInputs : Inputs
+public class InputsMainMenuLevelItemSelection : IInputs
 {
+
+    IInputsController inputsController;
+
+    public InputsMainMenuLevelItemSelection(IInputsController inputsController)
+    {
+        this.inputsController = inputsController;
+    }
+
     public void pressA()
     {
         throw new System.NotImplementedException();
@@ -28,4 +35,5 @@ public class SettingsInputs : Inputs
     {
         throw new System.NotImplementedException();
     }
+
 }

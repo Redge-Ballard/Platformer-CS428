@@ -7,6 +7,7 @@ public class MasterController : MonoBehaviour {
 	// Singleton
 	private static MasterController instance;
 	private static int setI;
+    private List<IGameStateListener> gameStateListeners = new List<IGameStateListener>();
 
 	private MasterController(){}
 
@@ -19,6 +20,7 @@ public class MasterController : MonoBehaviour {
 			}
 			return instance;
 		}
+
 	}
 
 	// Data
@@ -57,6 +59,11 @@ public class MasterController : MonoBehaviour {
 	// public void AddGameStateListener(IGameStateListener listener){
 
 	// }
+
+    public void addGameStateListener(IGameStateListener gameStateListener)
+    {
+        this.gameStateListeners.Add(gameStateListener);
+    }
 
 	private void Awake() {
 		if(instance == null){

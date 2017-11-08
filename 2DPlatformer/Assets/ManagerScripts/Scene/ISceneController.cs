@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISceneController : IGameActions {
+public interface ISceneController : IInputsControllerListener {
 
 }
