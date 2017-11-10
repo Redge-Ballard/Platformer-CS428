@@ -13,17 +13,16 @@ public class Player : MonoBehaviour, IPlayer
     private List<IPlayerStatModifier> modifiers;
     private List<IPlayerListener> listeners;
 
-    void Awake()
+    void Start()
     {
-        //MasterController.Instance.GetCurrentSceneController().RegisterPlayerScript();
-
+        MasterController.instance.registerPlayer(this);
         baseHealth = 1;
     }
 
     void Update()
     {
-        Vector2 vec = new Vector2(.01f, 0);
-        PlayerMove(vec);
+        //Vector2 vec = new Vector2(.01f, 0);
+        //PlayerMove(vec);
     }
 
     public void PlayerMove(Vector2 move)
@@ -144,4 +143,8 @@ public class Player : MonoBehaviour, IPlayer
             listen.Update();
         }
     }
+
+    //public void AddPlayer(IPlayer player) {
+        
+    //}
 }

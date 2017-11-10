@@ -5,26 +5,20 @@ using UnityEngine;
 public class MasterController : MonoBehaviour {
 	
 	// Singleton
-	private static MasterController instance;
-	private static int setI;
+    public static MasterController instance { get; set; }
     private List<IGameStateListener> gameStateListeners = new List<IGameStateListener>();
+    private ISceneController sceneController;
+    private GameState gameState = GameState.LevelSinglePlayer;
 
-	private MasterController(){}
+	//private MasterController(){}
 
-	public static MasterController Instance {
-		get {
-			if (instance == null && setI == 0) {
-				setI = 1;
-				//Debug.Log ("creating new Master");
-				instance = new MasterController ();
-			}
-			return instance;
-		}
-
-	}
+	//public static MasterController Instance {
+	//	get {
+	//		return instance;
+	//	}
+	//}
 
 	// Data
-	private ISceneController sceneController;
 	// private GameState gameState;
 	// private List<IGameStateListener> gameStateListener;
 	// private Settings settings;
@@ -36,9 +30,10 @@ public class MasterController : MonoBehaviour {
 
 	// }
 
-	private bool registerAsSceneController(ISceneController sceneController){
+    public bool registerAsSceneController(ISceneController sceneController){
 		//Might need additional operations to properly dispose of the old but...
-		this.sceneController=sceneController;
+		this.sceneController = sceneController;
+        getInputsController().registerListener(sceneController);
 		return true;
 	}
 
@@ -46,11 +41,11 @@ public class MasterController : MonoBehaviour {
 		return sceneController;
 	}
 
-	public void initializeMenuSceneController()
-	{
-		//Debug.Log ("initializing!");
-		sceneController = new SceneControllerMainMenu ();
-	}
+	//public void initializeMenuSceneController()
+	//{
+	//	//Debug.Log ("initializing!");
+	//	sceneController = new SceneControllerMainMenu ();
+	//}
 
 	// public void UpdateGameState(GameState gameState){
 		
@@ -60,9 +55,19 @@ public class MasterController : MonoBehaviour {
 
 	// }
 
+    public void registerPlayer(IPlayer player) {
+        this.sceneController.registerPlayer(player);
+    }
+
+    public IInputsController getInputsController() {
+        return this.gameObject.GetComponent<IInputsController>();
+    }
+
+
     public void addGameStateListener(IGameStateListener gameStateListener)
     {
         this.gameStateListeners.Add(gameStateListener);
+        gameStateListener.UpdateForNewGameState(this.gameState);
     }
 
 	private void Awake() {
@@ -72,11 +77,12 @@ public class MasterController : MonoBehaviour {
 		} else if(instance != this){
 			Destroy(gameObject);
 		}
+
 	}
 
 	// Use this for initialization
 	void Start () {
-		sceneController = new SceneControllerMainMenu();
+		//sceneController = new SceneControllerMainMenu();
 
 
 	}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneControllerGenericLevel : ISceneController {
+public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
 
     IPlayersController playerController;
 
@@ -14,18 +14,23 @@ public class SceneControllerGenericLevel : ISceneController {
 
     public void menuMoveDirection(ActionObjectMoveMenuDirection a_actionObject)
     {
-        List<IPlayer> players = playerController.getPlayers();
-        IPlayer player = players[0];
+        throw new System.NotImplementedException();
     }
 
     public void playerMoveDirection(ActionObjectPlayerMoveDirection a_actionObject)
     {
-        throw new System.NotImplementedException();
+        IPlayer player = playerController.GetPlayer(0);
+        player.PlayerMove(a_actionObject.Direction);
     }
 
     public void playerUseAbility(ActionObjectPlayerUseAbility a_actionObject)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void registerPlayer(IPlayer player)
+    {
+        this.playerController.AddPlayer(player);
     }
 
     public void selectLevelAbility(ActionObjectSelectLevelAbility a_actionObject)
@@ -51,6 +56,12 @@ public class SceneControllerGenericLevel : ISceneController {
     public void showSettingsView(ActionObjectShowSettingsView a_actionObject)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Start()
+    {
+        this.playerController = new PlayersController();
+        MasterController.instance.registerAsSceneController(this);
     }
 
 }

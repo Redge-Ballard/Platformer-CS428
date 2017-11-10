@@ -11,13 +11,24 @@ public class InputsLevelSinglePlayer : MonoBehaviour, IInputs
         this.inputsController = inputsController; 
     }
 
+    private void Start()
+    {
+        this.inputsController = MasterController.instance.getInputsController();
+    }
     private void Update()
     {
-        if (Input.GetKeyDown("d"))
+        float horizontalMove = 0;
+        if (Input.GetKey("d"))
         {
-            Vector2 right = new Vector2(1, 0);
-            ActionObjectPlayerMoveDirection moveRight = new ActionObjectPlayerMoveDirection(1, right);
-            inputsController.playerMoveDirection(moveRight);
+            horizontalMove += .1f;
         }
+
+        if (Input.GetKey("a"))
+        {
+            horizontalMove -= .1f;
+        }
+        Vector2 moveVect = new Vector2(horizontalMove, 0);
+        ActionObjectPlayerMoveDirection move = new ActionObjectPlayerMoveDirection(1, moveVect);
+        inputsController.playerMoveDirection(move);
     }
 }

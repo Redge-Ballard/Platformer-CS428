@@ -7,12 +7,6 @@ public class InputsController : MonoBehaviour, IInputsController
     IInputs inputs;
     private List<IInputsControllerListener> listeners;
 
-    public InputsController(IInputs inputs)
-    {
-        this.inputs = inputs;
-        this.listeners = new List<IInputsControllerListener>();
-    }
-
     public void changeScene(ActionObjectChangeScene a_actionObject)
     {
         throw new System.NotImplementedException();
@@ -74,23 +68,29 @@ public class InputsController : MonoBehaviour, IInputsController
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump")) {
-            //inputs.pressJump(); 
-        }
+
+
+
     }
 
 
-    private void Awake()
+    private void Start()
     {
-        MasterController.Instance.addGameStateListener(this);
+        this.listeners = new List<IInputsControllerListener>();
+        MasterController.instance.addGameStateListener(this);
     }
 
     public void UpdateForNewGameState(GameState gameState)
     {
         switch (gameState) {
             case GameState.LevelSinglePlayer:
-                inputs = new InputsLevelSinglePlayer(this);
+                inputs = MasterController.instance.gameObject.AddComponent<InputsLevelSinglePlayer>();
                 break;
         }
+    }
+
+    public void registerListener(IInputsControllerListener listener)
+    {
+        this.listeners.Add(listener);
     }
 }

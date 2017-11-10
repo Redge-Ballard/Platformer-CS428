@@ -6,5 +6,6 @@ public interface IPlayersController {
 
     IPlayer GetPlayer(int playerNumber);
     List<IPlayer> getPlayers();
+    void AddPlayer(IPlayer player);
 
 }

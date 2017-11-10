@@ -9,9 +9,14 @@ public class PlayersController : IPlayersController, IPlayerListener {
 
     public PlayersController()
     {
-        Player player = new Player();
-        player.AddListener(this);
+        this.players = new List<IPlayer>();
+        this.listeners = new List<IPlayersControllerListener>();
+        //Player player = new Player();
+
+
+        //player.AddListener(this);
     }
+
 
     public IPlayer GetPlayer(int playerNum)
     {
@@ -37,4 +42,8 @@ public class PlayersController : IPlayersController, IPlayerListener {
         }
     }
 
+    public void AddPlayer(IPlayer player)
+    {
+        this.players.Add(player);
+    }
 }

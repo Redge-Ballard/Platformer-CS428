@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class PowerupSelectorManager : MonoBehaviour {
     HashSet<string> listOfSelections;
-	MasterController theMaster = MasterController.Instance;
+	//MasterController theMaster = MasterController.Instance;
     // Use this for initialization
     void Start () {
         listOfSelections = new HashSet<string>();
@@ -21,7 +21,7 @@ public class PowerupSelectorManager : MonoBehaviour {
     public void backToMenu()
     {
 		ActionObjectShowMainMenu a_actionObject = new ActionObjectShowMainMenu();
-		SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)theMaster.GetSceneController();
+        SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)MasterController.instance.GetSceneController();
 		SceneControl.showMainMenu (a_actionObject);
     }
 

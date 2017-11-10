@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MenuManager : MonoBehaviour {
-	MasterController theMaster = MasterController.Instance;
+	//MasterController theMaster = MasterController.Instance;
 	MainMenuViewBasic menuViewBasic = new MainMenuViewBasic();
 	// Use this for initialization
 	void Start () {
-		theMaster.initializeMenuSceneController();
+		//theMaster.initializeMenuSceneController();
 	}
 	
 	// Update is called once per frame
@@ -32,8 +32,8 @@ public class MenuManager : MonoBehaviour {
 		ActionObjectShowLevelSelectionsView a_actionObject = new ActionObjectShowLevelSelectionsView();
 
 		//theMaster.Start();
-		SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)theMaster.GetSceneController();
-		SceneControl.showLevelSelectionView (a_actionObject);
+		//SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)theMaster.GetSceneController();
+		//SceneControl.showLevelSelectionView (a_actionObject);
 
 	}
 }

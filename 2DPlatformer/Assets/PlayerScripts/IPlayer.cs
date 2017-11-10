@@ -15,4 +15,5 @@ public interface IPlayer  {
     bool RemoveAllModifiers();
     bool RemoveNegativeModifiers();
     bool RemovePositiveModifiers();
+    void PlayerMove(Vector2 direction);
 }

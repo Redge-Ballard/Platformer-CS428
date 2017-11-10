@@ -27,13 +27,13 @@ public class ActionObjectPlayerUseAbility : ActionObject{
 
 }
 public class ActionObjectPlayerMoveDirection : ActionObject{
-    Vector2 direction;
-    int playerNumber;
+    public Vector2 Direction { get; set; }
+    public int PlayerNumber { get; set; }
 
     public ActionObjectPlayerMoveDirection(int playerNumber, Vector2 direction)
     {
-        this.playerNumber = playerNumber;
-        this.direction = direction;
+        this.PlayerNumber = playerNumber;
+        this.Direction = direction;
     }
 }
 

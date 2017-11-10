@@ -9,7 +9,7 @@ public class LevelManagerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Debug.Log ("calling initialization");
-		theMaster = MasterController.Instance;
+		//theMaster = MasterController.Instance;
 	}
 	
 	// Update is called once per frame

@@ -51,4 +51,8 @@ public class SceneControllerMainMenu: ISceneController{
     {
     }
 
+    public void registerPlayer(IPlayer player)
+    {
+        throw new System.NotImplementedException();
+    }
 }
