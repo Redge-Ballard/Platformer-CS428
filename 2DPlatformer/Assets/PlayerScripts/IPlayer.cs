@@ -5,9 +5,8 @@ using UnityEngine;
 public interface IPlayer  {
 
     bool AddListener(IPlayerListener playerListener);
-    List<IItem> GetItems();
     int GetHealth();
-    int TakeDamage();
+    void TakeDamage(int dmg);
     int GetSpeed();
     int GetAcceleration();
     int GetJumpPower();
