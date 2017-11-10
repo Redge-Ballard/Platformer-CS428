@@ -27,5 +27,19 @@ public class ActionObjectPlayerUseAbility : ActionObject{
 
 }
 public class ActionObjectPlayerMoveDirection : ActionObject{
+    Vector2 direction;
+    int playerNumber;
+
+    public ActionObjectPlayerMoveDirection(int playerNumber, Vector2 direction)
+    {
+        this.playerNumber = playerNumber;
+        this.direction = direction;
+    }
+}
+
+public class ActionObjectMoveMenuDirection : ActionObject
+{
+    
+
 
 }
