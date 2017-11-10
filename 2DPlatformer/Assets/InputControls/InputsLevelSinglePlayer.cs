@@ -29,7 +29,6 @@ public class InputsLevelSinglePlayer : MonoBehaviour, IInputs
         }
 
         if (Input.GetKeyDown("space") || Input.GetKeyDown("w") ||  Input.GetKeyDown("up")) {
-            Debug.Log("JUMP");
             ActionObjectJump jump = new ActionObjectJump();
             inputsController.playerJump(jump);
         }

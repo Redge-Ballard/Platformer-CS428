@@ -19,7 +19,6 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
 
     public void playerJump(ActionObjectJump a_actionObject)
     {
-        Debug.Log("SceneController Jump");
         IPlayer player = playerController.GetPlayer(0);
         player.Jump();
     }

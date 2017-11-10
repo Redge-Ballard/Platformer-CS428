@@ -6,8 +6,8 @@ public class Player : MonoBehaviour, IPlayer
 {
 
     private int baseHealth;
-    private int baseSpeed;
-    private int baseAcceleration;
+    public int baseSpeed;
+    public int baseAcceleration;
     public int baseJumpPower = 500;
     private List<IPlayerStatModifier> persistentModifiers;
     private List<IPlayerStatModifier> modifiers;
@@ -17,6 +17,9 @@ public class Player : MonoBehaviour, IPlayer
     void Start()
     {
         MasterController.instance.registerPlayer(this);
+        persistentModifiers = new List<IPlayerStatModifier>();
+        modifiers = new List<IPlayerStatModifier>();
+        listeners = new List<IPlayerListener>();
         baseHealth = 1;
     }
 
@@ -147,11 +150,8 @@ public class Player : MonoBehaviour, IPlayer
 
     public void Jump()
     {
-        Debug.Log("Player Jump");
-        Debug.Log(isGrounded);
         if (isGrounded) {
-            Debug.Log("Adding Force");
-            this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, baseJumpPower));
+            this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, GetJumpPower()));
         }
     }
 
@@ -163,7 +163,6 @@ public class Player : MonoBehaviour, IPlayer
     public void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground") {
-            Debug.Log("Setting Player grounded false");
             isGrounded = false;
         }
     }
@@ -171,7 +170,6 @@ public class Player : MonoBehaviour, IPlayer
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground") {
-            Debug.Log("Setting Player grounded true");
             isGrounded = true;
         }
     }
