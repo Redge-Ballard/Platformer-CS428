@@ -93,4 +93,12 @@ public class InputsController : MonoBehaviour, IInputsController
     {
         this.listeners.Add(listener);
     }
+
+    public void playerJump(ActionObjectJump a_actionObject)
+    {
+        foreach (IInputsControllerListener listener in this.listeners)
+        {
+            listener.playerJump(a_actionObject);
+        }
+    }
 }

@@ -27,6 +27,13 @@ public class InputsLevelSinglePlayer : MonoBehaviour, IInputs
         {
             horizontalMove -= .1f;
         }
+
+        if (Input.GetKeyDown("space") || Input.GetKeyDown("w") ||  Input.GetKeyDown("up")) {
+            Debug.Log("JUMP");
+            ActionObjectJump jump = new ActionObjectJump();
+            inputsController.playerJump(jump);
+        }
+
         Vector2 moveVect = new Vector2(horizontalMove, 0);
         ActionObjectPlayerMoveDirection move = new ActionObjectPlayerMoveDirection(1, moveVect);
         inputsController.playerMoveDirection(move);

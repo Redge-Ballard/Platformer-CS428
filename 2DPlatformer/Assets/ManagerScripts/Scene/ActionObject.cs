@@ -26,6 +26,12 @@ public class ActionObjectSelectLevelAbility : ActionObject{
 public class ActionObjectPlayerUseAbility : ActionObject{
 
 }
+
+public class ActionObjectJump : ActionObject
+{
+
+}
+
 public class ActionObjectPlayerMoveDirection : ActionObject{
     public Vector2 Direction { get; set; }
     public int PlayerNumber { get; set; }

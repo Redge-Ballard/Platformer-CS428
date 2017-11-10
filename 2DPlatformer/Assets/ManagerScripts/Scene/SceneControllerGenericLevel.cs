@@ -17,6 +17,13 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
         throw new System.NotImplementedException();
     }
 
+    public void playerJump(ActionObjectJump a_actionObject)
+    {
+        Debug.Log("SceneController Jump");
+        IPlayer player = playerController.GetPlayer(0);
+        player.Jump();
+    }
+
     public void playerMoveDirection(ActionObjectPlayerMoveDirection a_actionObject)
     {
         IPlayer player = playerController.GetPlayer(0);

@@ -16,4 +16,6 @@ public interface IPlayer  {
     bool RemoveNegativeModifiers();
     bool RemovePositiveModifiers();
     void PlayerMove(Vector2 direction);
+    void Jump();
+    //bool IsGrounded();
 }

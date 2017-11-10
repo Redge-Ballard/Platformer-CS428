@@ -55,4 +55,9 @@ public class SceneControllerMainMenu: ISceneController{
     {
         throw new System.NotImplementedException();
     }
+
+    public void playerJump(ActionObjectJump a_actionObject)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -12,6 +12,7 @@ public interface IGameActions
     void selectLevelAbility(ActionObjectSelectLevelAbility a_actionObject);
     void playerUseAbility(ActionObjectPlayerUseAbility a_actionObject);
     void playerMoveDirection(ActionObjectPlayerMoveDirection a_actionObject);
+    void playerJump(ActionObjectJump a_actionObject);
     void menuMoveDirection(ActionObjectMoveMenuDirection a_actionObject);
 
 } 
