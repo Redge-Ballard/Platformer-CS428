@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IPlayer
 {
 
     private int baseHealth;
-    public int baseSpeed;
-    public int baseAcceleration;
-    public int baseJumpPower = 500;
+    public float currentMomentum = 0;
+    public float baseMaxSpeed = 1;
+    public float baseAcceleration = 1;
+    public float baseJumpPower = 500;
     private List<IPlayerStatModifier> persistentModifiers;
     private List<IPlayerStatModifier> modifiers;
     private List<IPlayerListener> listeners;
@@ -23,12 +23,6 @@ public class Player : MonoBehaviour, IPlayer
         baseHealth = 1;
     }
 
-    void Update()
-    {
-        //Vector2 vec = new Vector2(.01f, 0);
-        //PlayerMove(vec);
-    }
-
     public void PlayerMove(Vector2 move)
     {
         Vector3 pos = transform.position;
@@ -41,9 +35,9 @@ public class Player : MonoBehaviour, IPlayer
      * Helper function that takes the stat type and specific base stat and iterates over the modifiers, 
      * sums up the stat changes, and returns the final stats value 
      */
-    private int StatHelper(PlayerStatType type, int stat_base)
+    private float StatHelper(PlayerStatType type, float stat_base)
     {
-        int final = stat_base;
+        float final = stat_base;
         foreach(IPlayerStatModifier mod in persistentModifiers)
         {
             if(mod.GetType() == type)
@@ -72,18 +66,22 @@ public class Player : MonoBehaviour, IPlayer
         baseHealth -= dmg;
         UpdateListeners();
     }
-
-    public int GetSpeed()
+    public float GetMaxSpeed()
     {
-        return StatHelper(PlayerStatType.Speed, baseSpeed);
+        return StatHelper(PlayerStatType.Speed, baseMaxSpeed);
     }
 
-    public int GetAcceleration()
+    public float GetCurrentMomentum()
+    {
+        return StatHelper(PlayerStatType.Speed, currentMomentum);
+    }
+
+    public float GetAcceleration()
     {
         return StatHelper(PlayerStatType.Acceleration, baseAcceleration);
     }
 
-    public int GetJumpPower()
+    public float GetJumpPower()
     {
         return StatHelper(PlayerStatType.JumpPower, baseJumpPower);
     }
@@ -155,11 +153,6 @@ public class Player : MonoBehaviour, IPlayer
         }
     }
 
-    //public bool IsGrounded()
-    //{
-    //    re
-    //}
-
     public void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground") {
@@ -173,7 +166,4 @@ public class Player : MonoBehaviour, IPlayer
             isGrounded = true;
         }
     }
-    //public void AddPlayer(IPlayer player) {
-
-    //}
 }
