@@ -16,7 +16,6 @@ public class Player : MonoBehaviour, IPlayer
 
     void Start()
     {
-        //print("start of player controller");
         MasterController.instance.registerPlayer(this);
         persistentModifiers = new List<IPlayerStatModifier>();
         modifiers = new List<IPlayerStatModifier>();
