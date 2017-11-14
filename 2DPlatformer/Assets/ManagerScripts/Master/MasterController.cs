@@ -9,6 +9,7 @@ public class MasterController : MonoBehaviour {
     private List<IGameStateListener> gameStateListeners = new List<IGameStateListener>();
     private ISceneController sceneController;
     private GameState gameState = GameState.LevelSinglePlayer;
+    private List<IPlayer> unregisteredPlayers = new List<IPlayer>();
 
 	//private MasterController(){}
 
@@ -34,6 +35,18 @@ public class MasterController : MonoBehaviour {
 		//Might need additional operations to properly dispose of the old but...
 		this.sceneController = sceneController;
         getInputsController().registerListener(sceneController);
+        List<IPlayer> addedPlayers = new List<IPlayer>();
+        foreach (IPlayer player in this.unregisteredPlayers)
+        {
+            this.sceneController.registerPlayer(player);
+            addedPlayers.Add(player);
+            
+        }
+        for (int i = 0; i < addedPlayers.Count; i++) 
+        {
+            this.unregisteredPlayers.Remove(addedPlayers[i]);
+            
+        }
 		return true;
 	}
 
@@ -56,7 +69,14 @@ public class MasterController : MonoBehaviour {
 	// }
 
     public void registerPlayer(IPlayer player) {
-        this.sceneController.registerPlayer(player);
+        if (this.sceneController != null)
+        {
+            this.sceneController.registerPlayer(player);
+        }
+        else 
+        {
+            this.unregisteredPlayers.Add(player);
+        }
     }
 
     public IInputsController getInputsController() {
