@@ -44,6 +44,7 @@ public class PlayersController : IPlayersController, IPlayerListener {
 
     public void AddPlayer(IPlayer player)
     {
+        player.AddListener(this);
         this.players.Add(player);
     }
 }

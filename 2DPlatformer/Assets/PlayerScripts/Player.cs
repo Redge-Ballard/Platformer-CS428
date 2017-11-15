@@ -141,9 +141,9 @@ public class Player : MonoBehaviour, IPlayer
 
     public void UpdateListeners()
     {
-        foreach(IPlayerListener listen in listeners)
+        foreach(IPlayerListener listener in listeners)
         {
-            listen.Update();
+            listener.Update();
         }
     }
 

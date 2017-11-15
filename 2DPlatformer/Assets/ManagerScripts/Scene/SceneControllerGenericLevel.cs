@@ -74,5 +74,9 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
     public void UpdateState()
     {
         print("I'm being notified");
+        if (playerController.GetPlayer(0).GetHealth() <= 0)
+        {
+           print("Player is dead"); 
+        }
     }
 }

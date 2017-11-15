@@ -1,20 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DeathTrap : MonoBehaviour, ITrap {
 
     int cooldown;
-
-	// Use this for initialization
-	void Start () {
-        //set cooldown 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     //will notify player of collision  
     //maybe call TrapPlayer? 
