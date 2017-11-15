@@ -62,7 +62,8 @@ public class Player : MonoBehaviour, IPlayer
 
     //what does this return? the amount of damage taken? Or the current health after taking dmg? 
     public void TakeDamage(int dmg)
-    {
+    { 
+        print("In Player taking damage");
         baseHealth -= dmg;
         UpdateListeners();
     }
@@ -155,14 +156,14 @@ public class Player : MonoBehaviour, IPlayer
 
     public void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground") {
+        if (collision.gameObject.CompareTag("Ground")) {
             isGrounded = false;
         }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground") {
+        if (collision.gameObject.CompareTag("Ground")) {
             isGrounded = true;
         }
     }

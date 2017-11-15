@@ -38,7 +38,7 @@ public class PlayersController : IPlayersController, IPlayerListener {
         //notifies the scene controller that things have happened 
         foreach(IPlayersControllerListener listen in listeners)
         {
-            listen.Update();
+            listen.UpdateState();
         }
     }
 

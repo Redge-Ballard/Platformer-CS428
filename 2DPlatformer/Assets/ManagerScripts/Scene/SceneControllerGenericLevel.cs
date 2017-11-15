@@ -67,7 +67,12 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
     public void Start()
     {
         this.playerController = new PlayersController();
+        playerController.AddListener(this);
         MasterController.instance.registerAsSceneController(this);
     }
 
+    public void UpdateState()
+    {
+        print("I'm being notified");
+    }
 }

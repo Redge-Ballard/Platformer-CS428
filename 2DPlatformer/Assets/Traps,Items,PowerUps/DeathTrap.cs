@@ -18,11 +18,12 @@ public class DeathTrap : MonoBehaviour, ITrap {
 
     //will notify player of collision  
     //maybe call TrapPlayer? 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player"))
         {
-
+            IPlayer player = collision.gameObject.GetComponent<IPlayer>() as Player;
+            TrapPlayer(player);
         }
     }
 
