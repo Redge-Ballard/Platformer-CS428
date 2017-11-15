@@ -22,7 +22,7 @@ public class DeathTrap : MonoBehaviour, ITrap {
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            IPlayer player = collision.gameObject.GetComponent<IPlayer>() as Player;
+            IPlayer player = collision.gameObject.GetComponent<IPlayer>();
             TrapPlayer(player);
         }
     }
