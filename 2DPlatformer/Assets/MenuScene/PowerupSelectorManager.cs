@@ -29,7 +29,12 @@ public class PowerupSelectorManager : MonoBehaviour {
 	public void play()
 	{
 		//TODO: need to switch to whatever level we need. Also somehow pass the contents of ListOfSelections to it. 
-		Debug.Log("TODO: switch to the level scene");
+		//Debug.Log("TODO: switch to the level scene");
+
+		ActionObjectChangeScene a_actionObject = new ActionObjectChangeScene();
+		SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)MasterController.instance.GetSceneController();
+		SceneControl.changeScene (a_actionObject);
+
 	}
 
 
@@ -47,7 +52,7 @@ public class PowerupSelectorManager : MonoBehaviour {
 	{
 		UnityEngine.UI.Button btn = GameObject.Find(buttonName).GetComponent<Button>();
 		//btn.Select();
-		btn.image.color = Color.blue;
+		btn.image.color = Color.black;
 	}
 
 	/**
