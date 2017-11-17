@@ -32,4 +32,10 @@ public class MainMenuViewBasic: IMainMenuView{
 	public void SetController()
 	{
 	}
+
+	public void ShowTestLevelView()
+	{
+		SceneManager.LoadScene("Test");
+	}
+
 }

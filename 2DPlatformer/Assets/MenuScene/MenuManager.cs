@@ -6,9 +6,16 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour {
 	//MasterController theMaster = MasterController.Instance;
 	MainMenuViewBasic menuViewBasic = new MainMenuViewBasic();
+	static SceneControllerMainMenu menuController = new SceneControllerMainMenu();
+
+
+
+
+
 	// Use this for initialization
 	void Start () {
-		//theMaster.initializeMenuSceneController();
+		menuViewBasic = new MainMenuViewBasic();
+		menuController = new SceneControllerMainMenu();
 	}
 	
 	// Update is called once per frame
@@ -23,17 +30,20 @@ public class MenuManager : MonoBehaviour {
 		Debug.Log("TODO: Need to open some new level scene.");
     }
 
-
-    public void LevelSelect()
+	public void LevelSelect()
     {
         //SceneManager.LoadScene("LevelSelectionScene");
 		//Debug.Log ("Level select dawg");
 		//menuViewBasic.ShowLevelSelectionView();
+
+
+		MasterController.instance.registerAsSceneController (menuController);
+
 		ActionObjectShowLevelSelectionsView a_actionObject = new ActionObjectShowLevelSelectionsView();
 
 		//theMaster.Start();
-		//SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)theMaster.GetSceneController();
-		//SceneControl.showLevelSelectionView (a_actionObject);
+		SceneControllerMainMenu SceneControl = (SceneControllerMainMenu)MasterController.instance.GetSceneController();
+		SceneControl.showLevelSelectionView (a_actionObject);
 
 	}
 }
