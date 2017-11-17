@@ -40,7 +40,7 @@ public class MasterController : MonoBehaviour {
         {
             this.sceneController.registerPlayer(player);
             addedPlayers.Add(player);
-            
+
         }
         for (int i = 0; i < addedPlayers.Count; i++) 
         {

@@ -60,4 +60,9 @@ public class SceneControllerMainMenu: ISceneController{
     {
         throw new System.NotImplementedException();
     }
+
+	public void UpdateState()
+	{
+		throw new System.NotImplementedException();
+	}
 }

@@ -1,28 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DeathTrap : MonoBehaviour, ITrap {
 
     int cooldown;
 
-	// Use this for initialization
-	void Start () {
-        //set cooldown 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     //will notify player of collision  
     //maybe call TrapPlayer? 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player"))
         {
-
+            IPlayer player = collision.gameObject.GetComponent<IPlayer>();
+            TrapPlayer(player);
         }
     }
 
