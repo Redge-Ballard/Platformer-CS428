@@ -73,7 +73,6 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
 
     public void UpdateState()
     {
-        print("I'm being notified");
         IPlayer player = playerController.GetPlayer(0);
         if (player.GetHealth() <= 0)
         {
