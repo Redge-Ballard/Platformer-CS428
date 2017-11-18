@@ -4,6 +4,7 @@
 /2DPlatformer/[Bb]uild/
 /2DPlatformer/[Bb]uilds/
 /2DPlatformer/Assets/AssetStoreTools*
+/2DPlatformer/ProjectSettings/
 
 # Visual Studio 2015 cache directory
 /2DPlatformer/.vs/

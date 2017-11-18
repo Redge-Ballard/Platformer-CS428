@@ -1,32 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IPlayer
 {
 
     private int baseHealth;
-    private int baseSpeed;
-    private int baseAcceleration;
-    private int baseJumpPower;
+    public float currentMomentum = 0;
+    public float baseMaxSpeed = 1;
+    public float baseAcceleration = 1;
+    public float baseJumpPower = 500;
     private List<IPlayerStatModifier> persistentModifiers;
     private List<IPlayerStatModifier> modifiers;
     private List<IPlayerListener> listeners;
-    private List<IItem> items;
+    private bool isGrounded = false;
 
-    void Awake()
+    void Start()
     {
-        //needs to register itself with the scenecontroller
-        //MasterController.Instance.GetCurrentSceneController().RegisterPlayerScript();
+        MasterController.instance.registerPlayer(this);
+        persistentModifiers = new List<IPlayerStatModifier>();
+        modifiers = new List<IPlayerStatModifier>();
+        listeners = new List<IPlayerListener>();
+        baseHealth = 1;
+    }
+
+    public void PlayerMove(Vector2 move)
+    {
+        Vector3 pos = transform.position;
+        pos.x += move.x;
+        pos.y += move.y;
+        transform.position = pos;
     }
 
     /*
      * Helper function that takes the stat type and specific base stat and iterates over the modifiers, 
      * sums up the stat changes, and returns the final stats value 
      */
-    public int StatHelper(PlayerStatType type, int stat_base)
+    private float StatHelper(PlayerStatType type, float stat_base)
     {
-        int final = stat_base;
+        float final = stat_base;
         foreach(IPlayerStatModifier mod in persistentModifiers)
         {
             if(mod.GetType() == type)
@@ -43,11 +54,6 @@ public class Player : MonoBehaviour, IPlayer
         return true;
     }
 
-    public List<IItem> GetItems()
-    {
-        return items;
-    }
-
     //does this return base health? Or does it need to account for modifiers? 
     public int GetHealth()
     {
@@ -55,22 +61,28 @@ public class Player : MonoBehaviour, IPlayer
     }
 
     //what does this return? the amount of damage taken? Or the current health after taking dmg? 
-    public int TakeDamage()
+    public void TakeDamage(int dmg)
+    { 
+        print("In Player taking damage");
+        baseHealth -= dmg;
+        UpdateListeners();
+    }
+    public float GetMaxSpeed()
     {
-        return 0;
+        return StatHelper(PlayerStatType.Speed, baseMaxSpeed);
     }
 
-    public int GetSpeed()
+    public float GetCurrentMomentum()
     {
-        return StatHelper(PlayerStatType.Speed, baseSpeed);
+        return StatHelper(PlayerStatType.Speed, currentMomentum);
     }
 
-    public int GetAcceleration()
+    public float GetAcceleration()
     {
         return StatHelper(PlayerStatType.Acceleration, baseAcceleration);
     }
 
-    public int GetJumpPower()
+    public float GetJumpPower()
     {
         return StatHelper(PlayerStatType.JumpPower, baseJumpPower);
     }
@@ -78,12 +90,14 @@ public class Player : MonoBehaviour, IPlayer
     public bool AddPersistentModifier(IPlayerStatModifier modifier)
     {
         persistentModifiers.Add(modifier);
+        UpdateListeners();
         return true;
     }
 
     public bool AddModifier(IPlayerStatModifier modifier)
     {
         modifiers.Add(modifier);
+        UpdateListeners();
         return true;
     }
 
@@ -92,6 +106,7 @@ public class Player : MonoBehaviour, IPlayer
     {
         persistentModifiers = new List<IPlayerStatModifier>();
         modifiers = new List<IPlayerStatModifier>();
+        UpdateListeners();
         return true;
     }
 
@@ -105,6 +120,7 @@ public class Player : MonoBehaviour, IPlayer
             {
                 modifiers.Remove(mod);
             }
+            UpdateListeners();
         }
         return true;
     }
@@ -119,6 +135,36 @@ public class Player : MonoBehaviour, IPlayer
                 modifiers.Remove(mod);
             }
         }
+        UpdateListeners();
         return true;
+    }
+
+    public void UpdateListeners()
+    {
+        foreach(IPlayerListener listener in listeners)
+        {
+            listener.Update();
+        }
+    }
+
+    public void Jump()
+    {
+        if (isGrounded) {
+            this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, GetJumpPower()));
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground")) {
+            isGrounded = false;
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground")) {
+            isGrounded = true;
+        }
     }
 }
