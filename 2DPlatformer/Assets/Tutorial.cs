@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour {
 
+	private int lives;
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (ShowVictory ());
