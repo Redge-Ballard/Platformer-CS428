@@ -8,7 +8,6 @@ public class CharacterMovement : MonoBehaviour {
 	public float moveForce = 365f;
 	public float maxSpeed = 5f;
 	public float jumpForce = 1000f;
-	public Transform groundCheck;
 
 
 	private bool grounded = false;
@@ -24,7 +23,9 @@ public class CharacterMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		Vector3 ground = transform.position;
+		ground.y -= 1.2f;
+		grounded = Physics2D.Linecast(transform.position, ground, 1 << LayerMask.NameToLayer("Ground"));
 
 		if (Input.GetButtonDown("Jump") && grounded)
 		{

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour {
 
-	public int lives = 0;
+	private int lives;
 
 	// Use this for initialization
 	void Start () {
@@ -12,11 +12,11 @@ public class Tutorial : MonoBehaviour {
 		Vector3 vec = transform.position;
 		vec.x = 5;
 		transform.position = vec;
-	}//Queue 
-	
+	}//Queue
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	IEnumerator ShowVictory(){
