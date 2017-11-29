@@ -94,6 +94,12 @@ public class InputsController : MonoBehaviour, IInputsController
         this.listeners.Add(listener);
     }
 
+	public void replaceListeners(IInputsControllerListener listener)
+	{
+		this.listeners.Clear ();
+		this.listeners.Add (listener);
+	}
+
     public void playerJump(ActionObjectJump a_actionObject)
     {
         foreach (IInputsControllerListener listener in this.listeners)

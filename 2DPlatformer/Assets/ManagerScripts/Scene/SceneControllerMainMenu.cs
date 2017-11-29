@@ -14,12 +14,14 @@ public class SceneControllerMainMenu: ISceneController{
 
 	public void changeScene (ActionObjectChangeScene a_actionObject)
 	{
-		SceneControllerGenericLevel newSceneController = new SceneControllerGenericLevel ();
-		MasterController.instance.registerAsSceneController (newSceneController);
+		
 
 
 		MainMenuViewBasic theBasicMenuView = (MainMenuViewBasic)theMenuView; //todo: should we do something different here? Seems like this isn't the right avenue. 
 		theBasicMenuView.ShowTestLevelView ();
+
+		//SceneControllerGenericLevel newSceneController = new SceneControllerGenericLevel ();
+		//MasterController.instance.registerAsSceneController (newSceneController);
 	}
 
 	public void showMainMenu(ActionObjectShowMainMenu a_actionObject)

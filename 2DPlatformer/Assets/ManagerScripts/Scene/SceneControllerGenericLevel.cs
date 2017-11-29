@@ -66,6 +66,7 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
 
     public void Start()
     {
+		Debug.Log ("Registering as new SceneController");
         this.playerController = new PlayersController();
         playerController.AddListener(this);
         MasterController.instance.registerAsSceneController(this);

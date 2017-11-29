@@ -34,7 +34,7 @@ public class MasterController : MonoBehaviour {
     public bool registerAsSceneController(ISceneController sceneController){
 		//Might need additional operations to properly dispose of the old but...
 		this.sceneController = sceneController;
-        getInputsController().registerListener(sceneController);
+        getInputsController().replaceListeners(sceneController);
         List<IPlayer> addedPlayers = new List<IPlayer>();
         foreach (IPlayer player in this.unregisteredPlayers)
         {
