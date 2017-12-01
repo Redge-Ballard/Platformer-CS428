@@ -18,9 +18,8 @@ public class MenuManager : MonoBehaviour {
 
     public void QuickPlay()
     {
-		//TODO: maybe go immediately to section 1
-		//SceneManager.LoadScene("InitialScene");
-		Debug.Log("TODO: Need to open some new level scene.");
+
+		SceneManager.LoadScene("Level 1");
     }
 
 
