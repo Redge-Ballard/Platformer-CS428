@@ -58,13 +58,17 @@ public class Player : MonoBehaviour, IPlayer
                 {
                     final += mod.GetAmount();
                     mod.DecrementDuration();
-                    print("Duration remaining: " + mod.GetRemainingDuration().ToString());
+                    if (mod.GetRemainingDuration() % 100 == 0)
+                    {
+                        print("Duration remaining: " + mod.GetRemainingDuration().ToString());
+                    }
                 }
                 
             }
         }
         foreach (var mod in modifiersToRemove)
         {
+            print("Mod getting removed");
             this.modifiers.Remove(mod);
         }
         return final;
