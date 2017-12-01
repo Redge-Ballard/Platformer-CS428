@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IPlayer
 {
@@ -20,14 +21,13 @@ public class Player : MonoBehaviour, IPlayer
         persistentModifiers = new List<IPlayerStatModifier>();
         modifiers = new List<IPlayerStatModifier>();
         listeners = new List<IPlayerListener>();
-        baseHealth = 1;
     }
 
     public void PlayerMove(Vector2 move)
     {
         Vector3 pos = transform.position;
-        pos.x += move.x;
-        pos.y += move.y;
+        pos.x += move.x * GetAcceleration();
+        pos.y += move.y * GetAcceleration();
         transform.position = pos;
     }
 
@@ -44,6 +44,28 @@ public class Player : MonoBehaviour, IPlayer
             {
                 final += mod.GetAmount();
             }
+        }
+        List<IPlayerStatModifier> modifiersToRemove = new List<IPlayerStatModifier>();
+        foreach(IPlayerStatModifier mod in modifiers)
+        {
+            if(mod.GetType() == type)
+            {
+                if (mod.GetRemainingDuration() <= 0)
+                {
+                    modifiersToRemove.Add(mod);
+                }
+                else
+                {
+                    final += mod.GetAmount();
+                    mod.DecrementDuration();
+                    print("Duration remaining: " + mod.GetRemainingDuration().ToString());
+                }
+                
+            }
+        }
+        foreach (var mod in modifiersToRemove)
+        {
+            this.modifiers.Remove(mod);
         }
         return final;
     }
@@ -143,7 +165,7 @@ public class Player : MonoBehaviour, IPlayer
     {
         foreach(IPlayerListener listener in listeners)
         {
-            listener.Update();
+            listener.UpdatePlayerListener();
         }
     }
 

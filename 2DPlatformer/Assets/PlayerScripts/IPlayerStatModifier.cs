@@ -8,4 +8,5 @@ public interface IPlayerStatModifier
     int GetAmount();
     int GetRemainingDuration();
     int ModifyStat(PlayerStatType statType);
+    void DecrementDuration();
 }

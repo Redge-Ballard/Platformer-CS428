@@ -31,7 +31,8 @@ public class SceneControllerGenericLevel : MonoBehaviour, ISceneController {
 
     public void playerUseAbility(ActionObjectPlayerUseAbility a_actionObject)
     {
-        throw new System.NotImplementedException();
+        IPlayer player = playerController.GetPlayer(0);
+        player.AddModifier(a_actionObject.Modifier);
     }
 
     public void registerPlayer(IPlayer player)

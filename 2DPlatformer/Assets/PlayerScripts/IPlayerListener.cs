@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPlayerListener  {
 
-    void Update();
+    void UpdatePlayerListener();
 }

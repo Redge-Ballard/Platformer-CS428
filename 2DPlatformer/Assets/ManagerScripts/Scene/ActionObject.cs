@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public class ActionObject{
@@ -24,6 +25,13 @@ public class ActionObjectSelectLevelAbility : ActionObject{
 	//call this within PowerupSelectorManager
 }
 public class ActionObjectPlayerUseAbility : ActionObject{
+	public int PlayerNum { get; set; }
+	public IPlayerStatModifier Modifier { get; set; }
+	public ActionObjectPlayerUseAbility(int playerNumber, IPlayerStatModifier modifier)
+	{
+		this.PlayerNum = playerNumber;
+		this.Modifier = modifier;
+	}
 
 }
 

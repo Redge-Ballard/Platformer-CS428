@@ -5,7 +5,7 @@ using UnityEngine;
 public class MasterController : MonoBehaviour {
 	
 	// Singleton
-    public static MasterController instance { get; set; }
+    public static MasterController instance { get; private set; }
     private List<IGameStateListener> gameStateListeners = new List<IGameStateListener>();
     private ISceneController sceneController;
     private GameState gameState = GameState.LevelSinglePlayer;

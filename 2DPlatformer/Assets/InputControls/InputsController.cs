@@ -38,7 +38,10 @@ public class InputsController : MonoBehaviour, IInputsController
 
     public void playerUseAbility(ActionObjectPlayerUseAbility a_actionObject)
     {
-        throw new System.NotImplementedException();
+        foreach (IInputsControllerListener listener in this.listeners)
+        {
+            listener.playerUseAbility(a_actionObject);
+        } 
     }
 
     public void selectLevelAbility(ActionObjectSelectLevelAbility a_actionObject)

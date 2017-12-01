@@ -33,6 +33,14 @@ public class InputsLevelSinglePlayer : MonoBehaviour, IInputs
             inputsController.playerJump(jump);
         }
 
+        if (Input.GetKey("j"))
+        {
+            PlayerStatModifier_Acceleration modifier = new PlayerStatModifier_Acceleration(300, 1);
+            ActionObjectPlayerUseAbility speedUpModifier= new ActionObjectPlayerUseAbility(1, modifier);
+            inputsController.playerUseAbility(speedUpModifier);
+        }
+        
+
         Vector2 moveVect = new Vector2(horizontalMove, 0);
         ActionObjectPlayerMoveDirection move = new ActionObjectPlayerMoveDirection(1, moveVect);
         inputsController.playerMoveDirection(move);
